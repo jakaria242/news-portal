@@ -15,7 +15,7 @@ const NewsContent = () => {
             </select>
             <input type="text" placeholder='search news' className='px-3 py-2 rounded-md outline-0 bg-transparent border border-slate-700 focus:border-teal-500 h-10 text-[#d0d2d6]'/>
         </div>
-        <div className='relative overflow-x-auto p-4'>
+        <div className='relative overflow-x-auto py-4 px-2'>
             <table className='w-full text-sm taxt-[#d0d2d6] text-left'>
                 <thead className='text-xs text-white uppercase bg-[#283046]'>
                     <tr>
@@ -34,7 +34,7 @@ const NewsContent = () => {
                         <td className='px-6 py-4'>1</td>
                         <td className='px-6 py-4'>Bangladesh Nal Be......</td>
                         <td className='px-6 py-4'>
-                            <img className='w-[40px] h-[40px]' src={natural} alt="image" />
+                            <img className='w-[40px] h-[40px] object-cover' src={natural} alt="image" />
                         </td>
                         <td className='px-6 py-4'>Trabel</td>
                         <td className='px-6 py-4'>You all must have wa....</td>
