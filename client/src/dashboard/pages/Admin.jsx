@@ -1,7 +1,7 @@
 import React from 'react'
 import natural from '../../assets/images/natural.jpg'
 import { Link } from 'react-router-dom'
-import { FaEdit, FaEye, FaTrash } from 'react-icons/fa'
+import { FaEye } from 'react-icons/fa'
 
 const Admin = () => {
   return (

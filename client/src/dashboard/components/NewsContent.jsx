@@ -2,6 +2,7 @@ import React from 'react'
 import natural from '../../assets/images/natural.jpg'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaEye, FaTrash } from 'react-icons/fa'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 
 const NewsContent = () => {
   return (
@@ -52,6 +53,23 @@ const NewsContent = () => {
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div className='flex items-center justify-end px-10 gap-x-3 text-[#d0d2d6] py-3'>
+            <div className='flex gap-x-3 justify-center items-center'>
+                <p className='px-4 py-3 font-semibold text-sm'>News par page</p>
+                <select className='px-3 py-2 rounded-md outline-0 bg-[#283046] border border-slate-700 focus:border-teal-500 h-10 text-[#d0d2d6]'>
+                   <option value="5">5</option>
+                   <option value="5">10</option>
+                   <option value="15">15</option>
+                   <option value="25">20</option>
+                   <option value="25">25</option>
+                </select>
+            </div>
+            <p className='px-6 py-3 font-semibold text-sm'>1/22 - of 5</p>
+            <div className='flex items-center gap-x-3'>
+                <IoIosArrowBack className='w-5 h-5 cursor-pointer'/>
+                <IoIosArrowForward className='w-5 h-5 cursor-pointer'/>
+            </div>
         </div>
     </div>
   )
