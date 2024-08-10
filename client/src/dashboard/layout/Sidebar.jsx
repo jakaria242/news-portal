@@ -9,6 +9,11 @@ import { CgProfile } from "react-icons/cg";
 
 const Sidebar = () => {
     const {pathname} = useLocation()
+
+     const userInfo = {
+      role : 'writer'
+     }
+
   return (
     <div className='w-[250px] h-screen fixed top-0 left-0 bg-[#283046]'>
           <div className='h-[70px] flex justify-center items-center'>
@@ -17,16 +22,14 @@ const Sidebar = () => {
              </Link>
           </div>
           <ul className='px-3 flex flex-col gap-y-1 font-medium'>
+
+             {
+              userInfo.role === 'admin' ?
+            <>
               <li>
                 <Link to='/dashboard/admin' className={`px-3 py-2 hover:shadow-lg hover:shadow-teal-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-teal-500 hover:text-white ${pathname === '/dashboard/admin' ? 'bg-teal-500 text-white': ''}`}>
                 <span className='text-xl'><AiFillDashboard/></span>
                 <span className='capitalize'>Dashboard</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/dashboard/news' className={`px-3 py-2 hover:shadow-lg hover:shadow-teal-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-teal-500 hover:text-white ${pathname === '/dashboard/news' ? 'bg-teal-500 text-white': ''}`}>
-                <span className='text-xl'><BiNews/></span>
-                <span className='capitalize'>News</span>
                 </Link>
               </li>
               <li>
@@ -41,6 +44,32 @@ const Sidebar = () => {
                 <span>Writers</span>
                 </Link>
               </li>
+            </>
+              :
+              <>
+              <li>
+                <Link to='/dashboard/writer' className={`px-3 py-2 hover:shadow-lg hover:shadow-teal-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-teal-500 hover:text-white ${pathname === '/dashboard/writer' ? 'bg-teal-500 text-white': ''}`}>
+                <span className='text-xl'><AiFillDashboard/></span>
+                <span className='capitalize'>Dashboard</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='/dashboard/add/news' className={`px-3 py-2 hover:shadow-lg hover:shadow-teal-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-teal-500 hover:text-white ${pathname === '/dashboard/add/news' ? 'bg-teal-500 text-white': ''}`}>
+                <span className='text-xl'><AiOutlinePlus/></span>
+                <span>Add News</span>
+                </Link>
+              </li>
+              
+              </>
+             }
+
+              <li>
+                <Link to='/dashboard/news' className={`px-3 py-2 hover:shadow-lg hover:shadow-teal-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-teal-500 hover:text-white ${pathname === '/dashboard/news' ? 'bg-teal-500 text-white': ''}`}>
+                <span className='text-xl'><BiNews/></span>
+                <span className='capitalize'>News</span>
+                </Link>
+              </li>
+             
               <li>
                 <Link to='/dashboard/profile' className={`px-3 py-2 hover:shadow-lg hover:shadow-teal-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-teal-500 hover:text-white ${pathname === '/dashboard/profile' ? 'bg-teal-500 text-white': ''}`}>
                 <span className='text-xl'><CgProfile/></span>

@@ -3,7 +3,7 @@ import natural from '../../assets/images/natural.jpg'
 import { Link } from 'react-router-dom'
 import { FaEye } from 'react-icons/fa'
 
-const Admin = () => {
+const AdminIndex = () => {
   return (
     <div className='mt-2'>
       <div className='grid grid-cols-5 gap-5'>
@@ -78,4 +78,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default AdminIndex
