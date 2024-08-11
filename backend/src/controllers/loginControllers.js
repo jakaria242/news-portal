@@ -12,7 +12,7 @@ const  loginUser = async (req,res)=>{
       return res.status(404).json({message: 'please enter your password'})
    }
  
-   let existingUser = await Author.findOne({email:email}).select('+password')
+   let existingUser = await Author.findOne({email: email}).select('+password')
 
    if (existingUser == null) {
     return res.status(400).json({message : "We can not find any account in this email" })
@@ -35,8 +35,7 @@ const  loginUser = async (req,res)=>{
         return res.status(400).json({message : "password invalid" })
     }
 
-    console.log(match);
-    
+   
    
 }
 
