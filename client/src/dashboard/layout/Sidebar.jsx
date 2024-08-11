@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiFillDashboard, AiOutlinePlus } from "react-icons/ai";
 import { BiNews } from "react-icons/bi";
 import newsportal from '../../assets/images/newsportal.png'
 import { FiUsers } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
+import storeContext from '../../contextApi/storeContext'
 
 
 const Sidebar = () => {
     const {pathname} = useLocation()
 
-     const userInfo = {
-      role : 'writer'
-     }
-
+    const { store } = useContext(storeContext)
   return (
     <div className='w-[250px] h-screen fixed top-0 left-0 bg-[#283046]'>
           <div className='h-[70px] flex justify-center items-center'>
@@ -24,7 +22,7 @@ const Sidebar = () => {
           <ul className='px-3 flex flex-col gap-y-1 font-medium'>
 
              {
-              userInfo.role === 'admin' ?
+              store.userInfo?.role === 'admin' ?
             <>
               <li>
                 <Link to='/dashboard/admin' className={`px-3 py-2 hover:shadow-lg hover:shadow-teal-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-teal-500 hover:text-white ${pathname === '/dashboard/admin' ? 'bg-teal-500 text-white': ''}`}>

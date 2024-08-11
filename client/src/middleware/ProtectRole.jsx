@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
+import storeContext from '../contextApi/storeContext'
 
 const ProtectRole = ({ role }) => {
 
-    const userInfo = {
-      name : 'Jakaria',
-      role : 'writer'
-  }
+     const { store } = useContext(storeContext)
 
-  if (userInfo.role === role) {
+  if (store.userInfo?.role === role) {
      return <Outlet/>
 
   }else{

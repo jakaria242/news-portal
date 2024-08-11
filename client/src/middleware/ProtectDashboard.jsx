@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
+import storeContext from '../contextApi/storeContext'
 
 const ProtectDashboard = () => {
  
-    
     const userInfo = {
-        name : 'Jakaria',
-        role : 'admin'
-    }
+        role : 'writer'
+      }
+    const { store } = useContext(storeContext)
 
-    if (userInfo) {
+    if (store.userInfo) {
        return <Outlet/>
 
     }else{

@@ -2,10 +2,16 @@ import React, { useState } from 'react'
 import newsportal from '../../assets/images/newsportal.png'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import storeContext from '../../contextApi/storeContext'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+    
 
-    const [loder, setLoder] = useState(false)
+   const navigate = useNavigate()
+   const { dispatch } = useContext(storeContext)
+   const [loder, setLoder] = useState(false)
    const [login, setLogin] = useState({
     email : '',
     password: ''
@@ -22,11 +28,21 @@ const Login = () => {
   const handleSubmit = async (e)=> {
     e.preventDefault()
     try {
-       const { data } = await axios.post(`${base_url}/api/login`, login)
-       console.log(data);
+      setLoder(true)
+       const { data } = await axios.post('http://localhost:8000/api/login', login)
+       localStorage.setItem("newsToken", data.token)
+       toast.success(data.message)
+       setLoder(false)
+       dispatch({
+         type : 'login-successful',
+         payload : {
+          token : data.token
+         }
+       })
+       navigate('/dashboard')
     } catch (error) {
-       console.log(error);
-       
+      setLoder(false)
+      toast.error(error.response.data.message)
     }
   }
 
@@ -50,7 +66,7 @@ const Login = () => {
                         <input onChange={inputHandle}  value={login.password} type="password" placeholder='password' className='px-3 py-2 rounded-md outline-0 bg-transparent border border-slate-400 focus:border-blue-500 h-10 text-black font-medium' id='password' name='password'/>
                       </div>
                       <div className='mt-5'>
-                        <button className='px-3 py-[6px] w-full bg-blue-700 rounded-md text-[#d0d2d6] hover:bg-blue-600 hover:text-white font-bold'>Login</button> 
+                        <button disabled={loder} className='px-3 py-[6px] w-full bg-blue-700 rounded-md text-[#d0d2d6] hover:bg-blue-600 hover:text-white font-bold'>{loder ? "loding...." : "Login"}</button> 
                       </div>
                   </div>
               </form>

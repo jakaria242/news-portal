@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -17,14 +17,15 @@ import News from './dashboard/pages/News';
 import Profile from './dashboard/pages/Profile';
 import WriterIndex from './dashboard/pages/WriterIndex';
 import CreateNews from './dashboard/pages/CreateNews';
+// import storeContext from './contextApi/storeContext'
 
 
 function App() {
 
-
   const userInfo = {
     role : 'writer'
   }
+  // const { store } = useContext(storeContext)
 
 
   return (
