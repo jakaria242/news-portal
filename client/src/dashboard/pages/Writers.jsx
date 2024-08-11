@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import profile from '../../assets/images/profile.png'
 import { FaEye } from 'react-icons/fa'
+import axios from 'axios'
+import storeContext from '../../contextApi/storeContext'
 
 const Writers = () => {
+
+  const { store } = useContext(storeContext)
+  const [writers, setWriters] = useState([])
+
+  const getWriter =async ()=>{
+    try {
+      const { data } = await axios.get('http://localhost:8000/api/news/writers',{
+          headers : {
+            'Authorization' : `Bearer ${store.token}`
+          }
+        })
+        setWriters(data.writers)
+    } catch (error) {
+      console.log(error); 
+    }
+  }
+
+  useEffect(()=>{
+    getWriter()
+  },[getWriter])
+
   return (
     <div className='bg-[#283046] rounded-md'>
     <div className='flex justify-between items-center p-4'>
@@ -26,19 +49,19 @@ const Writers = () => {
                 </thead>
                 <tbody>
                   {
-                    [1,2,3,4,5].map((n,i)=>( 
+                   writers.map((w,i)=>( 
                       <tr key={i} className='bg-[#283046] bordre-b text-[#d0d2d6]'>
                       <td className='px-6 py-4'>{i+1}</td>
-                      <td className='px-6 py-4'>Jahidul Islam</td>
-                      <td className='px-6 py-4'>Education</td>
-                      <td className='px-6 py-4'>writer</td>
+                      <td className='px-6 py-4'>{w.name}</td>
+                      <td className='px-6 py-4 capitalize'>{w.category}</td>
+                      <td className='px-6 py-4 capitalize'>{w.role}</td>
                       <td className='px-6 py-4'>
                           <img className='w-[40px] h-[40px] rounded-full object-cover' src={profile} alt="image" />
                       </td>
-                      <td className='px-6 py-4'>jahidul123@gmail.com</td>
+                      <td className='px-6 py-4'>{w.email}</td>
                       <td className='px-6 py-4'>
                           <div className='flex justify-start items-center gap-x-4 text-white'>
-                              <Link className='p-[6px] bg-green-500 rounded hover:shadow-lg hover:shadow-green-500/50'><FaEye/></Link>
+                              <Link to={`/dashboard/write/${w._id}`} className='p-[6px] bg-green-500 rounded hover:shadow-lg hover:shadow-green-500/50'><FaEye/></Link>
                           </div>
                       </td>
                   </tr>

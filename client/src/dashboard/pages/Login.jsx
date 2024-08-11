@@ -31,8 +31,8 @@ const Login = () => {
       setLoder(true)
        const { data } = await axios.post('http://localhost:8000/api/login', login)
        localStorage.setItem("newsToken", data.token)
-       toast.success(data.message)
        setLoder(false)
+       toast.success(data.message)
        dispatch({
          type : 'login-successful',
          payload : {

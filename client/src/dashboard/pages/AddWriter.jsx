@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import storeContext from '../../contextApi/storeContext'
+import { useNavigate } from 'react-router-dom'
 
 const AddWriter = () => {
-    
-   const { store } = useContext(storeContext)
+  const navigate = useNavigate()
+  const { store } = useContext(storeContext)
+   const [loder, setLoder] = useState(false) 
    const [addWriter, setAddWriter] = useState({
     name : '',
     email: '',
@@ -24,14 +26,25 @@ const AddWriter = () => {
    const handleSubmit = async (e)=> {
     e.preventDefault()
       try {
+        setLoder(true)
         const { data } = await axios.post('http://localhost:8000/api/news/add/writer', addWriter, {
           headers : {
             'Authorization' : `Bearer ${store.token}`
           }
         })
-        console.log(data);
+        setLoder(false)
+        toast.success(data.message)
+
+        setAddWriter({
+          name : '',
+          email: '',
+          password: '',
+          category: '',
+        })
+        navigate('/dashboard/writers')
       } catch (error) {
-         console.log(error);
+        setLoder(false)
+        toast.error(error.response.data.message)
          
       }
     
@@ -75,7 +88,7 @@ const AddWriter = () => {
            </div>
         </div>
         <div className='mt-5'>
-        <button className='px-3 py-[6px] bg-teal-700 rounded-md text-[#d0d2d6] hover:bg-teal-600 hover:text-white'>Add Writer</button> 
+        <button disabled={loder} className='px-3 py-[6px] bg-teal-700 rounded-md text-[#d0d2d6] hover:bg-teal-600 hover:text-white'>{loder ? "loding...." : "Add Writer"}</button> 
         </div>
       </form>
     </div>
