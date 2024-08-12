@@ -11,9 +11,8 @@ app.use(cors({
 }))
 
 app.use('/',require('./routes/authRouts'))
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use('/',require('./routes/addNewsRoutes'))
+
 dbConnection()
 app.listen(port, () => {
   console.log(`Server is runing on port ${port}`)
