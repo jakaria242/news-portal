@@ -1,17 +1,27 @@
 import React, { useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AiFillDashboard, AiOutlinePlus } from "react-icons/ai";
 import { BiNews } from "react-icons/bi";
 import newsportal from '../../assets/images/newsportal.png'
 import { FiUsers } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import storeContext from '../../contextApi/storeContext'
+import { IoLogOutOutline } from "react-icons/io5";
+
 
 
 const Sidebar = () => {
     const {pathname} = useLocation()
+     const navigate = useNavigate()
+    const { store,dispatch } = useContext(storeContext)
 
-    const { store } = useContext(storeContext)
+    const handleLogout = () => {
+        localStorage.removeItem('newsToken')
+        dispatch({ type: 'logout', payload: ""})
+        navigate('/login')
+    }
+
+
   return (
     <div className='w-[250px] h-screen fixed top-0 left-0 bg-[#283046]'>
           <div className='h-[70px] flex justify-center items-center'>
@@ -74,6 +84,14 @@ const Sidebar = () => {
                 <span>Profile</span>
                 </Link>
               </li>
+
+              <li>
+                <div onClick={handleLogout}  className={`px-3 py-2 hover:shadow-lg cursor-pointer hover:shadow-red-500/20 w-full rounded-sm flex gap-2 justify-start items-center text-[#d0d2d6] hover:bg-red-500 hover:text-white`}>
+                <span className='text-xl'><IoLogOutOutline /></span>
+                <span className='capitalize'>Logout</span>
+                </div>
+              </li>
+
           </ul>
     </div>
   )

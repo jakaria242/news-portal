@@ -9,7 +9,10 @@
         // console.log(payload);
          state.token = payload.token
          state.userInfo = deCodeToken(payload.token)
-        
+     }
+     if (type === 'logout') {
+        state.token = ''
+        state.userInfo = ''
      }
     return state
  }

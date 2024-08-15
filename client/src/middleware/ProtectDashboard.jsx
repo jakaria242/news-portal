@@ -4,9 +4,7 @@ import storeContext from '../contextApi/storeContext'
 
 const ProtectDashboard = () => {
  
-    const userInfo = {
-        role : 'writer'
-      }
+
     const { store } = useContext(storeContext)
 
     if (store.userInfo) {
